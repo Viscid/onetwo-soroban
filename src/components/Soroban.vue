@@ -1,6 +1,6 @@
 <template>
   <div class="soroban" :style="{ height: height + 'px' }">
-      <Rail class="rail" :reset="reset" v-on:value-change="updateValue" :width="width" v-for="n in Number(rails)" :railNumber="n"></Rail>
+      <Rail class="rail" :value="sorobanDigits" :reset="reset" :width="width" v-for="n in Number(rails)" :railNumber="n"></Rail>
   </div>
 </template>
 
@@ -23,19 +23,28 @@ export default {
   props: [
     'rails',
     'height',
-    'reset'
+    'reset',
+    'value'
   ],
+  created () {
+    this.sorobanDigits = this.value ? this.value.toString(10).split('').map(function (d) {
+      return Number(d)
+    }) : this.sorobanDigits
+  },
   watch: {
-    reset: function (value) {
+    reset: function () {
       this.sorobanDigits = new Array(Number(this.rails))
+    },
+    value: function (value) {
+      console.log(value)
     }
   },
   methods: {
     updateValue (beadValue, railNumber) {
       this.sorobanDigits[railNumber - 1] = beadValue
-      this.$emit('value-change', this.value())
+      this.$emit('value-change', this.getValue())
     },
-    value () {
+    getValue () {
       let sorobanDigits = []
       for (let i = 0; i < this.sorobanDigits.length; i++) {
         sorobanDigits[i] = (this.sorobanDigits[i] ? this.sorobanDigits[i] : 0)

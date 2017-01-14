@@ -48,14 +48,57 @@ export default {
       })
     }
   },
-  props: ['width', 'railNumber', 'reset'],
+  props: ['width', 'railNumber', 'reset', 'value'],
   watch: {
     reset () {
       this.beadState = [false, false, false, false, false]
       this.updateBeads()
     }
   },
+  mounted () {
+    if (this.value) {
+      this.setBeads(this.value[Number(this.railNumber - 1)])
+    }
+  },
   methods: {
+    setBeads (railValue) {
+      switch (railValue) {
+        case 0:
+          this.beadState = [false, false, false, false, false]
+          break
+        case 1:
+          this.beadState = [true, false, false, false, false]
+          break
+        case 2:
+          this.beadState = [true, true, false, false, false]
+          break
+        case 3:
+          this.beadState = [true, true, true, false, false]
+          break
+        case 4:
+          this.beadState = [true, true, true, true, false]
+          break
+        case 5:
+          this.beadState = [false, false, false, false, true]
+          break
+        case 6:
+          this.beadState = [true, true, false, false, true]
+          break
+        case 7:
+          this.beadState = [true, true, false, false, true]
+          break
+        case 8:
+          this.beadState = [true, true, true, false, true]
+          break
+        case 9:
+          this.beadState = [true, true, true, true, true]
+          break
+        default:
+          this.beadState = [false, false, false, false, false]
+          break
+      }
+      this.updateBeads()
+    },
     updateBeads () {
       const oneBead = document.getElementById(this.oneBeadId)
       const twoBead = document.getElementById(this.twoBeadId)
@@ -93,46 +136,48 @@ export default {
       this.$emit('value-change', this.beadValue, this.railNumber)
     },
     toggleBead (beadId) {
-      switch (beadId) {
-        case this.oneBeadId:
-          this.beadState[0] = !this.beadState[0]
-          if (!this.beadState[0]) {
-            this.beadState[1] = false
-            this.beadState[2] = false
-            this.beadState[3] = false
-          }
-          break
-        case this.twoBeadId:
-          this.beadState[1] = !this.beadState[1]
-          if (!this.beadState[1]) {
-            this.beadState[2] = false
-            this.beadState[3] = false
-          } else {
-            this.beadState[0] = true
-          }
-          break
-        case this.threeBeadId:
-          this.beadState[2] = !this.beadState[2]
-          if (!this.beadState[2]) {
-            this.beadState[3] = false
-          } else {
-            this.beadState[0] = true
-            this.beadState[1] = true
-          }
-          break
-        case this.fourBeadId:
-          this.beadState[3] = !this.beadState[3]
-          if (this.beadState[3]) {
-            this.beadState[0] = true
-            this.beadState[1] = true
-            this.beadState[2] = true
-          }
-          break
-        case this.fiveBeadId:
-          this.beadState[4] = !this.beadState[4]
-          break
+      if (!this.value) {
+        switch (beadId) {
+          case this.oneBeadId:
+            this.beadState[0] = !this.beadState[0]
+            if (!this.beadState[0]) {
+              this.beadState[1] = false
+              this.beadState[2] = false
+              this.beadState[3] = false
+            }
+            break
+          case this.twoBeadId:
+            this.beadState[1] = !this.beadState[1]
+            if (!this.beadState[1]) {
+              this.beadState[2] = false
+              this.beadState[3] = false
+            } else {
+              this.beadState[0] = true
+            }
+            break
+          case this.threeBeadId:
+            this.beadState[2] = !this.beadState[2]
+            if (!this.beadState[2]) {
+              this.beadState[3] = false
+            } else {
+              this.beadState[0] = true
+              this.beadState[1] = true
+            }
+            break
+          case this.fourBeadId:
+            this.beadState[3] = !this.beadState[3]
+            if (this.beadState[3]) {
+              this.beadState[0] = true
+              this.beadState[1] = true
+              this.beadState[2] = true
+            }
+            break
+          case this.fiveBeadId:
+            this.beadState[4] = !this.beadState[4]
+            break
+        }
+        this.updateBeads()
       }
-      this.updateBeads()
     }
   }
 }
