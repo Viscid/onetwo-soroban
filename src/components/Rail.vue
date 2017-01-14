@@ -4,7 +4,7 @@
         <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
         <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg>
-    <svg  viewBox="0 0 150 10"  :style="{left: '0px', top: 200 * (width / 150) + 'px', position: 'absolute'}" :id="beadSeparatorId">
+    <svg viewBox="0 0 150 10"  :style="{left: '0px', top: 200 * (width / 150) + 'px', position: 'absolute'}" :id="beadSeparatorId">
         <line stroke="#BBB" stroke-width="20" x1="0" y1="0" x2="150" y2="0" />
     </svg>
     <svg class="bead" :id="oneBeadId" :style="{left: '0px', top: 310 * (width / 150) + 'px'}"  @click="toggleBead(oneBeadId)" viewBox="0 0 150 100">
@@ -28,6 +28,7 @@
 
 <script>
 import Velocity from 'velocity-animate'
+import { Howl } from 'howler'
 
 export default {
   name: 'Rail',
@@ -41,10 +42,19 @@ export default {
       threeBeadId: 'three-bead-' + this._uid,
       fourBeadId: 'four-bead-' + this._uid,
       fiveBeadId: 'five-bead-' + this._uid,
-      beadSeparatorId: 'bead-separator-' + this._uid
+      beadSeparatorId: 'bead-separator-' + this._uid,
+      sound: new Howl({
+        src: ['/static/soroban-move.mp3']
+      })
     }
   },
-  props: ['width', 'railNumber'],
+  props: ['width', 'railNumber', 'reset'],
+  watch: {
+    reset () {
+      this.beadState = [false, false, false, false, false]
+      this.updateBeads()
+    }
+  },
   methods: {
     updateBeads () {
       const oneBead = document.getElementById(this.oneBeadId)
@@ -79,6 +89,7 @@ export default {
         this.beadValue = this.beadValue + 5
       }
 
+      this.sound.play()
       this.$emit('value-change', this.beadValue, this.railNumber)
     },
     toggleBead (beadId) {

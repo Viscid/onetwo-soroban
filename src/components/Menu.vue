@@ -58,6 +58,7 @@ export default {
 .menuContainer {
   margin: 2em auto;
   width: 410px;
+  padding: 1em; 
 }
 
 .titleColor {

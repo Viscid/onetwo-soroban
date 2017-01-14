@@ -31,8 +31,32 @@ export default {
   color: #2c3e50;
 }
 
+*
+{
+    -webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    /*IE10*/
+    -ms-user-select: none;
+    user-select: none;
+
+    /*You just need this if you are only concerned with android and not desktop browsers.*/
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+
+body {
+  margin: 0;
+}
+
 .topNav {
   text-align: left;
+  background-color: #F5F5F5;
+  padding: 5px;
+  border-bottom: 2px solid #B55;
+}
+
+a:active {
+
 }
 
 .routeName {
