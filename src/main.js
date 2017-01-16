@@ -7,8 +7,9 @@ import App from './App'
 
 import Menu from './components/Menu'
 
-import SetSingleDigits from './components/SetSingleDigits'
-import ReadSingleDigits from './components/ReadSingleDigits'
+import SetSingleDigits from './components/lessons/SetSingleDigits'
+import ReadSingleDigits from './components/lessons/ReadSingleDigits'
+import ReadMultipleDigits from './components/lessons/ReadMultipleDigits'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,10 @@ const router = new VueRouter({
           name: 'Reading Single Digits',
           path: '/reading_single_digits',
           component: ReadSingleDigits
+        }, {
+          name: 'Reading Multiple Digits',
+          path: '/reading_multiple_digits',
+          component: ReadMultipleDigits
         }
       ]
     }

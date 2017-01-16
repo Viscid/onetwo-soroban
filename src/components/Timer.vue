@@ -19,6 +19,7 @@ export default {
     correctAnswer () {
       if (this.correctAnswer) {
         this.stop()
+        this.$emit('timer-value', this.stringTime)
       } else {
         this.reset()
       }

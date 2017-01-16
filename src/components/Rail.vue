@@ -1,28 +1,30 @@
 <template>
-  <div :id="id" :style="{ width: width + 'px' }" class="rail">
-    <svg class="bead" style="left: 0px; top: 0px;" :id="fiveBeadId" @click="toggleBead(fiveBeadId)" viewBox="0 0 150 100">
+  <div :id="id" class="rail">
+  <svg viewBox="0 0 150 710" :height="height" style="position: relative;">
+    <svg class="bead" y="0" :id="fiveBeadId" @click="toggleBead(fiveBeadId)">
         <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
         <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg>
-    <svg viewBox="0 0 150 10"  :style="{left: '0px', top: 200 * (width / 150) + 'px', position: 'absolute'}" :id="beadSeparatorId">
-        <line stroke="#BBB" stroke-width="20" x1="0" y1="0" x2="150" y2="0" />
+    <svg y="205" :id="beadSeparatorId">
+        <line stroke="#BBB" stroke-width="10" x1="0" y1="0" x2="150" y2="0" />
     </svg>
-    <svg class="bead" :id="oneBeadId" :style="{left: '0px', top: 310 * (width / 150) + 'px'}"  @click="toggleBead(oneBeadId)" viewBox="0 0 150 100">
+    <svg class="bead" y="310" :id="oneBeadId" @click="toggleBead(oneBeadId)">
       <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
       <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg> <br />
-    <svg class="bead" :id="twoBeadId"  :style="{left: '0px', top: 410 * (width / 150) + 'px'}"  @click="toggleBead(twoBeadId)" viewBox="0 0 150 100">
+    <svg class="bead" y="410" :id="twoBeadId" @click="toggleBead(twoBeadId)">
       <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
       <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg> <br />
-    <svg class="bead" :id="threeBeadId" :style="{left: '0px', top: 510 * (width / 150) + 'px'}"  @click="toggleBead(threeBeadId)" viewBox="0 0 150 100">
+    <svg class="bead" y="510" :id="threeBeadId" @click="toggleBead(threeBeadId)">
       <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
       <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg> <br />
-    <svg class="bead" :id="fourBeadId" :style="{left: '0px', top: 610 * (width / 150) + 'px'}"  @click="toggleBead(fourBeadId)"  viewBox="0 0 150 100">
+    <svg class="bead" y="610" :id="fourBeadId" @click="toggleBead(fourBeadId)">
       <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
       <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg>
+  </svg>
   </div>
 </template>
 
@@ -48,16 +50,18 @@ export default {
       })
     }
   },
-  props: ['width', 'railNumber', 'reset', 'value'],
+  props: ['railNumber', 'reset', 'setValue', 'disabled', 'height', 'disabled'],
   watch: {
     reset () {
       this.beadState = [false, false, false, false, false]
-      this.updateBeads()
+    },
+    setValue (newValue) {
+      this.setBeads(newValue[Number(this.railNumber - 1)])
     }
   },
   mounted () {
-    if (this.value) {
-      this.setBeads(this.value[Number(this.railNumber - 1)])
+    if (this.setValue) {
+      this.setBeads(this.setValue[Number(this.railNumber - 1)])
     }
   },
   methods: {
@@ -82,7 +86,7 @@ export default {
           this.beadState = [false, false, false, false, true]
           break
         case 6:
-          this.beadState = [true, true, false, false, true]
+          this.beadState = [true, false, false, false, true]
           break
         case 7:
           this.beadState = [true, true, false, false, true]
@@ -106,13 +110,11 @@ export default {
       const fourBead = document.getElementById(this.fourBeadId)
       const fiveBead = document.getElementById(this.fiveBeadId)
 
-      const widthRatio = this.width / 150
-
-      this.beadState[0] ? Velocity(oneBead, { top: 210 * widthRatio }, 50) : Velocity(oneBead, { top: 310 * widthRatio }, 50)
-      this.beadState[1] ? Velocity(twoBead, { top: 310 * widthRatio }, 50) : Velocity(twoBead, { top: 410 * widthRatio }, 50)
-      this.beadState[2] ? Velocity(threeBead, { top: 410 * widthRatio }, 50) : Velocity(threeBead, { top: 510 * widthRatio }, 50)
-      this.beadState[3] ? Velocity(fourBead, { top: 510 * widthRatio }, 50) : Velocity(fourBead, { top: 610 * widthRatio }, 50)
-      this.beadState[4] ? Velocity(fiveBead, { top: 100 * widthRatio }, 50) : Velocity(fiveBead, { top: 0 }, 50)
+      this.beadState[0] ? Velocity(oneBead, { y: 210 }, 50) : Velocity(oneBead, { y: 310 }, 50)
+      this.beadState[1] ? Velocity(twoBead, { y: 310 }, 50) : Velocity(twoBead, { y: 410 }, 50)
+      this.beadState[2] ? Velocity(threeBead, { y: 410 }, 50) : Velocity(threeBead, { y: 510 }, 50)
+      this.beadState[3] ? Velocity(fourBead, { y: 510 }, 50) : Velocity(fourBead, { y: 610 }, 50)
+      this.beadState[4] ? Velocity(fiveBead, { y: 100 }, 50) : Velocity(fiveBead, { y: 0 }, 50)
 
       this.beadValue = 0
 
@@ -132,11 +134,10 @@ export default {
         this.beadValue = this.beadValue + 5
       }
 
-      this.sound.play()
       this.$emit('value-change', this.beadValue, this.railNumber)
     },
     toggleBead (beadId) {
-      if (!this.value) {
+      if (!this.disabled) {
         switch (beadId) {
           case this.oneBeadId:
             this.beadState[0] = !this.beadState[0]
@@ -176,6 +177,7 @@ export default {
             this.beadState[4] = !this.beadState[4]
             break
         }
+        this.sound.play()
         this.updateBeads()
       }
     }
@@ -188,10 +190,10 @@ export default {
 .rail {
   position: relative;
   user-select: none;
+  padding: 5px 0;
 }
 
 .bead {
-  position: absolute;
   opacity: 0.63;
   cursor: pointer;
 }

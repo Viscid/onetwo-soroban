@@ -1,6 +1,6 @@
 <template>
-  <div class="soroban" :style="{ height: height + 'px' }">
-      <Rail class="rail" :value="sorobanDigits" :reset="reset" :width="width" v-for="n in Number(rails)" :railNumber="n"></Rail>
+  <div class="soroban">
+      <Rail class="rail" :setValue="sorobanDigits" v-on:value-change="updateValue" :reset="reset" :height="height" v-for="n in Number(rails)" :railNumber="n" :disabled="disabled"></Rail>
   </div>
 </template>
 
@@ -24,19 +24,27 @@ export default {
     'rails',
     'height',
     'reset',
-    'value'
+    'value',
+    'disabled'
   ],
   created () {
-    this.sorobanDigits = this.value ? this.value.toString(10).split('').map(function (d) {
+    var valueString = this.value ? this.pad(this.value.toString()) : this.value
+
+    this.sorobanDigits = this.value ? valueString.split('').map(function (d) {
       return Number(d)
     }) : this.sorobanDigits
+    this.pad(this.sorobanDigits)
   },
   watch: {
     reset: function () {
       this.sorobanDigits = new Array(Number(this.rails))
     },
     value: function (value) {
-      console.log(value)
+      var valueString = this.pad(value.toString())
+
+      this.sorobanDigits = valueString.split('').map(function (d) {
+        return Number(d)
+      })
     }
   },
   methods: {
@@ -50,6 +58,11 @@ export default {
         sorobanDigits[i] = (this.sorobanDigits[i] ? this.sorobanDigits[i] : 0)
       }
       return Number(sorobanDigits.join(''))
+    },
+    pad (number) {
+      var s = number + ''
+      while (s.length < this.rails) s = '0' + s
+      return s
     }
   }
 }
