@@ -1,26 +1,26 @@
 <template>
   <div :id="id" class="rail">
   <svg viewBox="0 0 150 710" :height="height" style="position: relative;">
-    <svg class="bead" y="0" :id="fiveBeadId" @click="toggleBead(fiveBeadId)">
+    <svg class="bead" y="0" :id="fiveBeadId" @mousedown="toggleBead(fiveBeadId)">
         <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
         <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg>
     <svg y="205" :id="beadSeparatorId">
         <line stroke="#BBB" stroke-width="10" x1="0" y1="0" x2="150" y2="0" />
     </svg>
-    <svg class="bead" y="310" :id="oneBeadId" @click="toggleBead(oneBeadId)">
+    <svg class="bead" y="310" :id="oneBeadId" @mousedown="toggleBead(oneBeadId)">
       <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
       <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg> <br />
-    <svg class="bead" y="410" :id="twoBeadId" @click="toggleBead(twoBeadId)">
+    <svg class="bead" y="410" :id="twoBeadId" @mousedown="toggleBead(twoBeadId)">
       <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
       <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg> <br />
-    <svg class="bead" y="510" :id="threeBeadId" @click="toggleBead(threeBeadId)">
+    <svg class="bead" y="510" :id="threeBeadId" @mousedown="toggleBead(threeBeadId)">
       <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
       <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg> <br />
-    <svg class="bead" y="610" :id="fourBeadId" @click="toggleBead(fourBeadId)">
+    <svg class="bead" y="610" :id="fourBeadId" @mousedown="toggleBead(fourBeadId)">
       <polygon stroke="white" style="stroke-width: 2px;" points="0 49 50 0 100 0 150 49" fill="khaki" />
       <polygon stroke="white" style="stroke-width: 2px;" points="0 51 50 100 100 100 150 51" fill="#A38A00" />
     </svg>
