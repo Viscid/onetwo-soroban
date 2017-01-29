@@ -12,14 +12,10 @@
 export default {
   data () {
     return {
-
+      blah: 'yo'
     }
-  },
-  watch: {
-
   }
 }
-
 </script>
 
 <style>

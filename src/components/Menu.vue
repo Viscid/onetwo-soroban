@@ -26,8 +26,12 @@
     <h3> Easy Addition </h3>
 
     <ol start="4">
-      <li> Adding single sigits </li>
-      <li> Adding multiple digits </li>
+      <li>
+    	<router-link to="adding_single_digits"> Adding single sigits </router-link>
+      </li>
+      <li> 
+        <router-link to="adding_multiple_digits"> Adding multiple digits </router-link>
+      </li>
     </ol>
 
   </div>
