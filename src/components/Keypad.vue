@@ -1,17 +1,17 @@
 <template>
   <div class="keypad">
-    <a @click="keyPressed(1)" class="key"> 1 </a>
-    <a @click="keyPressed(2)" class="key"> 2 </a>
-    <a @click="keyPressed(3)" class="key"> 3 </a>
-    <a @click="keyPressed(4)" class="key"> 4 </a>
-    <a @click="keyPressed(5)" class="key"> 5 </a>
-    <a @click="keyPressed(6)" class="key"> 6 </a>
-    <a @click="keyPressed(7)" class="key"> 7 </a>
-    <a @click="keyPressed(8)" class="key"> 8 </a>
-    <a @click="keyPressed(9)" class="key"> 9 </a>
+    <a @mousedown="keyPressed(1)" class="key"> 1 </a>
+    <a @mousedown="keyPressed(2)" class="key"> 2 </a>
+    <a @mousedown="keyPressed(3)" class="key"> 3 </a>
+    <a @mousedown="keyPressed(4)" class="key"> 4 </a>
+    <a @mousedown="keyPressed(5)" class="key"> 5 </a>
+    <a @mousedown="keyPressed(6)" class="key"> 6 </a>
+    <a @mousedown="keyPressed(7)" class="key"> 7 </a>
+    <a @mousedown="keyPressed(8)" class="key"> 8 </a>
+    <a @mousedown="keyPressed(9)" class="key"> 9 </a>
     <a v-show="!simple" @click="reset()" class="key reset"> Reset </a>
-    <a @click="keyPressed(0)" class="key zero"> 0 </a>
-    <a v-show="!simple" @click="enter()" class="key enter"> Enter </a>
+    <a @mousedown="keyPressed(0)" class="key zero"> 0 </a>
+    <a v-show="!simple" @click="enter()" class="key enter">  </a>
   </div>
 
 

@@ -11,7 +11,12 @@ import SetSingleDigits from './components/lessons/SetSingleDigits'
 import ReadSingleDigits from './components/lessons/ReadSingleDigits'
 import ReadMultipleDigits from './components/lessons/ReadMultipleDigits'
 import AddSingleDigits from './components/lessons/AddSingleDigits'
-import AddMultipleDigits from './components/lessons/AddMultipleDigits'
+import AddFourDigits from './components/lessons/AddFourDigits'
+import SubtractTwoDigits from './components/lessons/SubtractTwoDigits'
+import SubtractFourDigits from './components/lessons/SubtractFourDigits'
+import AddSubtractThreeDigits from './components/lessons/AddSubtractThreeDigits'
+import AddSubtractFiveDigits from './components/lessons/AddSubtractFiveDigits'
+import AddSubtractHard from './components/lessons/AddSubtractHard'
 
 Vue.use(VueRouter)
 
@@ -42,9 +47,29 @@ const router = new VueRouter({
           path: '/adding_single_digits',
           component: AddSingleDigits
         }, {
-          name: 'Adding Multiple Digits',
-          path: '/adding_multiple_digits',
-          component: AddMultipleDigits
+          name: 'Adding Four Digits',
+          path: '/adding_four_digits',
+          component: AddFourDigits
+        }, {
+          name: 'Subtracting Two Digits',
+          path: '/subtracting_two_digits',
+          component: SubtractTwoDigits
+        }, {
+          name: 'Subtracting Four Digits',
+          path: '/subtracting_four_digits',
+          component: SubtractFourDigits
+        }, {
+          name: 'Addition & Subtraction - Three Digits',
+          path: '/add_subtract_three_digits',
+          component: AddSubtractThreeDigits
+        }, {
+          name: 'Addition & Subtraction - Five Digits',
+          path: '/add_subtract_five_digits',
+          component: AddSubtractFiveDigits
+        }, {
+          name: 'Addition & Subtraction - Hard',
+          path: '/add_subtract_hard',
+          component: AddSubtractHard
         }
       ]
     }

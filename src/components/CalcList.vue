@@ -3,12 +3,12 @@
         <ul>
             <li v-for="(calc, index) in calcs">
                     <span :class="[{activeCalc: (index === calcIndex), futureCalc: (index > calcIndex)}]">
-                    <span class="calcOperation"> {{ getOperation(calc) }} </span> 
+                    <span class="calcOperation"> {{ getOperation(calc) }} </span>
                     <span class="calcNumber"> {{ calc.number }} </span>
                    </span>
             </li>
             <li class="answer" v-show="calcIndex === calcs.length"> <hr /> {{ answer }}</li>
-               
+
         </ul>
     </div>
 </template>
@@ -47,7 +47,7 @@ export default {
     }
 
     .calcList {
-            width: 10em;
+            width: 12em;
             padding: 2em 4em 0 0;
     }
 

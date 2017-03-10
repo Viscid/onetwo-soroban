@@ -3,14 +3,14 @@
   <div style="display: flex; margin: 0px; justify-content: center;">
     <Timer :correctAnswer="correctAnswer" v-on:timer-value="updateTime" />
     <div style="min-width: 50%;">
-      <p class="challengeDescription" v-show="!correctAnswer"> Perform the following operations: </p>
-      <p class="challengeSuccess" v-show="correctAnswer"> Correct. You took {{ answerTime }} seconds.</p>
       <div style="display: flex; align-items: top; justify-content: center;">
         <CalcList :calcs="calcs" :calcIndex="calcIndex" :answer="answer" />
         <div style="display: inline-block;">
-          <Soroban :reset="reset" v-on:value-change="sorobanInput" rails="5" height="500" />
+          <Soroban :reset="reset" v-on:value-change="sorobanInput" rails="4" height="500" />
         </div>
       </div>
+      <p class="resetButtonContainer" v-show="!correctAnswer"> <a class="resetButton" @click="resetChallenge"> Reset </a> </p>
+      <p class="challengeSuccess" v-show="correctAnswer"> Correct. You took {{ answerTime }} seconds.</p>
     </div>
 
   </div>
@@ -76,7 +76,12 @@ export default {
     },
 
     setChallenge () {
-      this.generateChallenge(['ADD'], 4, 6)
+      this.generateChallenge(['SUBTRACT', 'ADD'], 3, 3)
+    },
+
+    resetChallenge () {
+      this.setChallenge()
+      this.reset = !this.reset
     },
 
     updateTime (value) {
@@ -118,9 +123,15 @@ export default {
     generateCalc (operations, length, i) {
       let calc = {
         operation: (i === 0) ? false : operations[Math.floor(Math.random() * (operations.length))],
-        number: Math.floor(Math.random() * (Math.pow(9, length)) + 1),
         active: (i === 0)
       }
+
+      if (calc.operation === 'SUBTRACT') {
+        calc.number = (i === 0) ? Math.floor(Math.random() * (Math.pow(9, length)) + 1) : Math.floor(Math.random() * (this.answer) + 1)
+      } else {
+        calc.number = Math.floor(Math.random() * (Math.pow(9, length)) + 1)
+      }
+
       return calc
     },
     // Takes Operations: Array['ADD', 'SUBTRACT', 'MULTIPLY', 'DIVIDE'
@@ -142,12 +153,25 @@ export default {
 
 <style>
 
-.challengeDescription {
+.resetButtonContainer {
   font-size: 2em;
   margin: 0.2em 0 0 0;
-
+  text-align: center;
 }
 
+.resetButton {
+  background-color: #C66;
+  padding: 0.25em;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.resetButton:hover {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #A33;
+}
 .challengeSuccess {
   font-size: 2em;
   margin: 0.2em 0 0 0;

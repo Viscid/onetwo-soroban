@@ -27,10 +27,36 @@
 
     <ol start="4">
       <li>
-    	<router-link to="adding_single_digits"> Adding single sigits </router-link>
+    	   <router-link to="adding_single_digits"> Adding single sigits </router-link>
       </li>
-      <li> 
-        <router-link to="adding_multiple_digits"> Adding multiple digits </router-link>
+      <li>
+        <router-link to="adding_four_digits"> Adding four digits </router-link>
+      </li>
+    </ol>
+
+
+    <h3> Easy Subtraction </h3>
+
+    <ol start="6">
+      <li>
+    	   <router-link to="subtracting_double_digits"> Subtracting double sigits </router-link>
+      </li>
+      <li>
+        <router-link to="subtracting_four_digits"> Subtracting four digits </router-link>
+      </li>
+    </ol>
+
+    <h3> Mixed Addition / Subtraction </h3>
+
+    <ol start="8">
+      <li>
+    	   <router-link to="add_subtract_three_digits"> Addition / Subtraction - Three Digits </router-link>
+      </li>
+      <li>
+    	   <router-link to="add_subtract_five_digits"> Addition / Subtraction - Five Digits </router-link>
+      </li>
+      <li>
+    	   <router-link to="add_subtract_hard"> Addition / Subtraction - Hard </router-link>
       </li>
     </ol>
 
@@ -38,17 +64,6 @@
 
   </div>
 </template>
-
-<script>
-export default {
-  data () {
-    return {
-      menu: 'Menu!!'
-    }
-  }
-}
-
-</script>
 
 <style>
 #app {
@@ -62,7 +77,7 @@ export default {
 .menuContainer {
   margin: 2em auto;
   width: 410px;
-  padding: 1em; 
+  padding: 1em;
 }
 
 .titleColor {
