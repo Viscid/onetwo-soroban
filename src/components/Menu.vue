@@ -39,7 +39,7 @@
 
     <ol start="6">
       <li>
-    	   <router-link to="subtracting_double_digits"> Subtracting double sigits </router-link>
+    	   <router-link to="subtracting_two_digits"> Subtracting double sigits </router-link>
       </li>
       <li>
         <router-link to="subtracting_four_digits"> Subtracting four digits </router-link>

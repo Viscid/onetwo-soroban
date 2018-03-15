@@ -76,7 +76,7 @@ export default {
     },
 
     setChallenge () {
-      this.generateChallenge(['SUBTRACT', 'ADD'], 4, 4)
+      this.generateChallenge(['SUBTRACT'], 4, 4)
     },
 
     resetChallenge () {

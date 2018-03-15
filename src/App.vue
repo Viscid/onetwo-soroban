@@ -51,10 +51,6 @@ body {
   border-bottom: 2px solid #B55;
 }
 
-a:active {
-
-}
-
 .routeName {
   font-weight: bold;
 }

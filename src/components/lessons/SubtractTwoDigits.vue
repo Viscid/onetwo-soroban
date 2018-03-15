@@ -3,14 +3,14 @@
   <div style="display: flex; margin: 0px; justify-content: center;">
     <Timer :correctAnswer="correctAnswer" v-on:timer-value="updateTime" />
     <div style="min-width: 50%;">
-      <p class="challengeDescription" v-show="!correctAnswer"> Perform the following operations: </p>
-      <p class="challengeSuccess" v-show="correctAnswer"> Correct. You took {{ answerTime }} seconds.</p>
       <div style="display: flex; align-items: top; justify-content: center;">
-        <CalcList :calcs="calcs" :answer="answer" :calcIndex="calcIndex" />
+        <CalcList :calcs="calcs" :calcIndex="calcIndex" :answer="answer" />
         <div style="display: inline-block;">
-          <Soroban :reset="reset" v-on:value-change="sorobanInput" rails="2" height="500" />
+          <Soroban :reset="reset" v-on:value-change="sorobanInput" rails="3" height="500" />
         </div>
       </div>
+      <p class="resetButtonContainer" v-show="!correctAnswer"> <a class="resetButton" @click="resetChallenge"> Reset </a> </p>
+      <p class="challengeSuccess" v-show="correctAnswer"> Correct. You took {{ answerTime }} seconds.</p>
     </div>
 
   </div>
@@ -35,6 +35,20 @@ export default {
     }
   },
 
+  components: {
+    Soroban,
+    Timer,
+    CalcList
+  },
+
+  watch: {
+    keypadValue (value) {
+      if (value) {
+        this.checkAnswer()
+      }
+    }
+  },
+
   computed: {
     answer () {
       let total = 0
@@ -55,20 +69,6 @@ export default {
     }
   },
 
-  components: {
-    Soroban,
-    Timer,
-    CalcList
-  },
-
-  watch: {
-    keypadValue (value) {
-      if (value) {
-        this.checkAnswer()
-      }
-    }
-  },
-
   methods: {
     sorobanInput (value) {
       this.currentValue = value
@@ -76,7 +76,12 @@ export default {
     },
 
     setChallenge () {
-      this.generateChallenge(['SUBTRACT'], 2, 2)
+      this.generateChallenge(['SUBTRACT'], 2, 3)
+    },
+
+    resetChallenge () {
+      this.setChallenge()
+      this.reset = !this.reset
     },
 
     updateTime (value) {
@@ -110,7 +115,7 @@ export default {
           this.correctAnswer = false
           this.setChallenge()
           this.reset = !this.reset
-        }, 1500)
+        }, 3500)
         return
       }
     },
@@ -148,12 +153,25 @@ export default {
 
 <style>
 
-.challengeDescription {
+.resetButtonContainer {
   font-size: 2em;
   margin: 0.2em 0 0 0;
-
+  text-align: center;
 }
 
+.resetButton {
+  background-color: #C66;
+  padding: 0.25em;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.resetButton:hover {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #A33;
+}
 .challengeSuccess {
   font-size: 2em;
   margin: 0.2em 0 0 0;
